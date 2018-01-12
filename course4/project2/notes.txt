@@ -1,0 +1,42 @@
+setwd(dir = "G:/Rohit/HigherStudies/homework/course4/project2")
+nei <- readRDS("data/summarySCC_PM25.rds")
+scc <- readRDS("data/Source_Classification_Code.rds")
+####nei_scc_join = merge(x=nei_temp,y=scc_temp,all.x = TRUE,by = "SCC")
+nei_scc_join <- readRDS("data/nei_scc_join.RDS")
+nei_scc_df_graph_plot1 = nei_scc_join[nei_scc_join$year %in% c('1999',2002,2005,2008),]
+plot(nei_scc_df_graph_plot1$year,nei_scc_df_graph_plot1$Emissions,xlab="year",ylab="Emissions pm2.5",main="Boxplot of pm2.5 emissions each year")
+
+nei_scc_df_graph_plot2 = nei_scc_df_graph_plot1[ nei_scc_df_graph_plot1$year < 2008 || nei_scc_df_graph_plot1$year > 1998 && nei_scc_df_graph_plot1$year == "24510",]
+
+plot(nei_scc_df_graph_plot2$year,nei_scc_df_graph_plot2$Emissions,xlab="year",ylab = "Emissions pm2.5", main="Q2: Boxplot of pm2.5 emissions each year")
+fitx = lm (Emissions~year, data = nei_scc_df_graph_plot2)
+
+qplot(nei_scc_df_graph_plot2$year,nei_scc_df_graph_plot2$Emissions,data=nei_scc_df_graph_plot2,facets=.~type,xlab="year",ylab = "Emissions pm2.5",main="Q3: Boxplot of pm2.5 emissions each year")
+
+coal_related_vector=grepl("coal",nei_scc_join$Short.Name, ignore.case = TRUE)
+nei_scc_df_graph_plot3 = nei_scc_join [coal_related_vector,]
+plot4 = ggplot(nei_scc_df_graph_plot4,aes(factor(year),Emissions))+ geom_bar( stat = "identity") + xlab("year") + ylab ("Emissions")+ggtitle('Total Emissions from coal sources from 1999 to 2008')
+fit4 = lm (Emissions~year, data = nei_scc_df_graph_plot3)
+
+or
+
+plot4 = ggplot(nei_scc_df_graph_plot4,aes(factor(year),Emissions))+ geom_dotplot() +geom_smooth(method = "lm",formula = Emissions ~ year) + xlab("year") + ylab ("Emissions")+ggtitle('Total Emissions from coal sources from 1999 to 2008')
+
+
+
+### plot5
+png("plot5.png", width=840, height=480)
+sei_plot5=nei[nei$fips=="24510" & nei$type=="ON-ROAD"]
+nei_plot5_agg=aggregate(Emissions~year,sei_plot5,sum)
+plot5= ggplot(sei_plot5_agg, aes(factor(year), Emissions))+geom_bar(stat="identity") + xlab("year") +  ylab(expression('Total PM'[2.5]*" Emissions")) +  ggtitle('Total Emissions from motor vehicle (type = ON-ROAD) in Baltimore City')
+print(plot5)
+dev.off()
+## plot 6
+
+	)
+sei_plot6=nei[nei$fips=="24510" || NEI$fips=="06037"  && nei$type=="ON-ROAD"]
+sei_plot6_agg=aggregate(Emissions ~ year + fips, sei_plot6, sum)
+png("plot6.png", width=840, height=480)
+plot6 <- ggplot(aggregatedTotalByYearAndFips, aes(factor(year), Emissions)) + facet_grid(. ~ fips) + geom_bar(stat="identity") + xlab("year") +   ylab(expression('Total PM'[2.5]*" Emissions")) + ggtitle('Total Emissions from motor vehicle (type=ON-ROAD) in Baltimore City(fips 24510),LA(fips 06307)')
+print (plot6)
+  
