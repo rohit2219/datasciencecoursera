@@ -1,0 +1,67 @@
+file.exists("dirname") checks if directory exists or not
+dir.create("dirname") create a directory 
+download.file("x",destfile="filename_var", method="whatever") > downloads data from internet
+x = fileurl as an eg, method is the mode in which ur running for eg for mac it method="curl"
+
+Rules R programming
+
+Use a text editor, write your code and then refine it in R
+
+change directories
+getwd() : setwd(dir = "C:/Users/Rohit/Desktop/HigherStudies/homework/course4/")
+
+setwd(dir)
+list files
+list.files()
+
+install.packages("packagename")
+library(packagename) >> note that there is  no ""
+
+access each element in a dataframe
+
+swirl
+
+From the command line type install.packages("swirl").
+Once swirl is done installing type library("swirl"). This will load swirl into the current R Studio session.
+Now that swirl is loaded type swirl() to run it.
+
+How to make a matrix - use matrix function.
+x=matrix(c(1:9),nrow=3,ncol=3)
+
+finding unique values
+unique(data$FES,na.rm=TRUE)
+
+Note >> Important command str like str(a) will summarize the object a pretty well.. 
+summary(objectname) is also good
+download and susset individual columns- check C:\Users\Rph\Desktop\HigherStudies\homework\course3\course3week3 for sample data.
+fileurl="https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv"
+download.file(fileurl,destfile="uscommunities.csv")
+commdata<-read.table("uscommunities.csv",header=TRUE)
+summary(c((commdata$ACR=="3")&(commdata$AGS=="6")))
+
+READ JPEG's
+fileurl1="https://d396qusza40orc.cloudfront.net/getdata%2Fjeff.jpg"
+download.file(fileurl1,destfile="image.jpeg",mode="wb")
+img <- readJPEG("image.jpg", native = TRUE)
+quantile(img,c(.30,.80)) >> getting quantiles
+
+
+graphs
+x=rnorm(100)  y=rnorm(100)
+> with(faithful,plot(x,y),waiting)
+> pdf(file="testplot.pdf")
+> with(faithful,plot(x,y),waiting)
+> title(main = "test plotting")
+> dev.off()
+
+hist(as.numeric(df_pow_graph$Global_active_power),col = "red",main = "Global Active Power",ylab = "Global Active Power -Kilowatts" )
+
+closeAllConnections()
+rm(list=ls())
+
+graphs
+
+par(mar) --> gives u the margins
+par(mfrow=c(2,2))
+
+
